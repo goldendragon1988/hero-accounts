@@ -1,0 +1,124 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+paths:
+  "/api/v1/companies":
+    post:
+      summary: Creates a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: []
+      parameters: []
+      responses:
+        '201':
+          description: company created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+    get:
+      summary: Retrieves companies
+      tags:
+      - Companies
+      security:
+      - bearer_auth: []
+      responses:
+        '200':
+          description: companies found
+  "/api/v1/companies/{id}":
+    get:
+      summary: Retrieves a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: company found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  company:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                    required:
+                    - name
+    put:
+      summary: Updates a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: company created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+    delete:
+      summary: Destroy a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Company destroy
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

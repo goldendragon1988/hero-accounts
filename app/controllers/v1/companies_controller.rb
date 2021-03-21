@@ -22,9 +22,9 @@ class V1::CompaniesController < ApiController
 
   def update
     if @company.update(company_params)
-      render_success(@company, serializer: V1::CompanySerializer)
+      render_success(@company, 201, serializer: V1::CompanySerializer)
     else
-      render_errors(@company)
+      render_errors(@company, 422)
     end
   end
 
