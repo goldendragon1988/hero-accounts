@@ -118,7 +118,7 @@ paths:
         '200':
           description: Company destroy
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
       default: localhost:3000
