@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :active_permissions, -> { where(active: true) }, class_name: 'Permission', inverse_of: :user
   has_many :active_roles,       through: :active_permissions, source: :role
 
+  belongs_to :recruiter, class_name: "User", foreign_key: "recruiter_id", optional: true
+
+  has_and_belongs_to_many :companies
+
   def generate_jwt
     JWT.encode({ id: id, exp: exp }, Rails.application.secret_key_base)
   end
