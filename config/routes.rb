@@ -10,6 +10,13 @@ Rails.application.routes.draw do
         registrations: 'v1/registrations',
       }
 
+      resource :user, only: [:show] do
+        member do
+          put :onboard
+          put :add_company
+        end
+      end
+
       resources :companies
     end
   end

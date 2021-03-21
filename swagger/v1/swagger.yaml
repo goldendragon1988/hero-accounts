@@ -117,6 +117,116 @@ paths:
       responses:
         '200':
           description: Company destroy
+  "/api/v1/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Registration
+      parameters: []
+      responses:
+        '201':
+          description: User created
+        '422':
+          description: Invalid Credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    password:
+                      type: string
+                  required:
+                  - email
+                  - first_name
+                  - last_name
+                  - password
+  "/api/v1/user/onboard":
+    put:
+      summary: Creates a user role
+      tags:
+      - Registration
+      security:
+      - bearer_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: Role created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      enum:
+                      - recruiter
+                      - candidate
+                  required:
+                  - name
+  "/api/v1/users/sign_in":
+    post:
+      summary: Creates a user session
+      tags:
+      - Session
+      parameters: []
+      responses:
+        '201':
+          description: Valid Credentials
+        '422':
+          description: Invalid Credentials
+        '404':
+          description: User Not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: hulk@dev.com
+                    password:
+                      type: string
+                      example: password
+                  required:
+                  - email
+                  - password
+  "/api/v1/user/add_company":
+    put:
+      summary: Add Company to user
+      tags:
+      - Companies
+      security:
+      - bearer_auth: []
+      parameters: []
+      responses:
+        '201':
+          description: Company created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_id:
+                  type: number
 servers:
 - url: http://{defaultHost}
   variables:
