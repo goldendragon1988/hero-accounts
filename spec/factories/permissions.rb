@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :permission do
     active { false }
-    user { nil }
-    role { nil }
+    association :user, factory: :user, strategy: :create
+    association :role, factory: :role, strategy: :create
   end
 end
